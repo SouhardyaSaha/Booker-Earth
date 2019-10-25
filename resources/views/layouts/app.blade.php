@@ -36,7 +36,22 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        @guest
+                            <li><a href="{{ url('book-requests') }}">Book Requests</a></li>
+                        @else
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
+                                    Book Requests <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <li><a href="{{ url('book-requests/create') }}">Add</a></li>
+                                        <li><a href="{{ url('book-requests') }}">List</a></li>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endguest
                     </ul>
 
                     <!-- Right Side Of Navbar -->
