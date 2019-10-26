@@ -48,6 +48,22 @@ class BookPostController extends Controller
      * @param  \App\BookPost  $bookPost
      * @return \Illuminate\Http\Response
      */
+    public function search(Request $request)
+    {
+        $searchinput = $request->input('search');
+        $bookPosts = BookPost::where('title' , 'LIKE', '%' . $searchinput . '%')->get();
+        // $bookPosts->paginate(env('PAGINTAE', 10));
+
+        return view('book-posts.search', compact('bookPosts'));
+    }
+    
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\BookPost  $bookPost
+     * @return \Illuminate\Http\Response
+     */
     public function show(BookPost $bookPost)
     {
         //
