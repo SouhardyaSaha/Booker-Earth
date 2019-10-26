@@ -23,3 +23,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('book-requests', 'BookRequestsController@index');
 Route::post('book-requests', 'BookRequestsController@store');
 Route::get('book-requests/create', 'BookRequestsController@create');
+
+// Book Posts
+Route::resource('book-posts', 'BookPostController');

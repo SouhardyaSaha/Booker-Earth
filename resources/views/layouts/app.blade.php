@@ -51,6 +51,19 @@
                                     </li>
                                 </ul>
                             </li>
+
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
+                                    Book Posts <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <li><a href="{{ url('book-posts/create') }}">Add</a></li>
+                                        <li><a href="{{ url('book-posts') }}">List</a></li>
+                                    </li>
+                                </ul>
+                            </li>
                         @endguest
                     </ul>
 
