@@ -26,5 +26,5 @@ Route::get('book-requests/create', 'BookRequestsController@create');
 
 // Book Posts
 Route::resource('book-posts', 'BookPostController');
-Route::post('book-posts/search', 'BookPostController@search');
+// Route::post('book-posts/search', 'BookPostController@search');
 // Route::get('book-posts/search', 'BookPostController@search');

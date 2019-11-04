@@ -5,14 +5,15 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             {{-- search Bar --}}
-            <form class="form-horizontal" method="POST" action="{{ url('book-posts/search') }}">
+            <form class="form-horizontal" method="GET" action="{{ url('book-posts') }}">
                 {{ csrf_field() }}
 
                 <div class="form-group{{ $errors->has('search') ? ' has-error' : '' }}">
-                    <label for="search" class="col-md-4 control-label">Search</label>
+                    <label for="search" class="col-md-4 control-label"><i class="fa fa-search fa-2x"></i></label>
 
-                    <div class="col-md-6">
-                        <input id="search" type="text" class="form-control" name="search" value="{{ old('search') }}" required autofocus>
+                    <div class="col-md-6" >
+                        <input id="search" type="text"  class="form-control" name="search" value = {{$searchInput}}>
+                        {{-- value="{{ old('search') }}" required autofocus --}}
 
                         @if ($errors->has('search'))
                             <span class="help-block">

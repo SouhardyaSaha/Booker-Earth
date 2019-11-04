@@ -20,7 +20,7 @@
                                 </li>
                             @endforeach
                         </ul>
-                        {{-- <center>{{ $bookPosts->links() }}</center> --}}
+                        <center>{{ $bookPosts->links() }}</center>
                     @else
                         <p>No record found.</p>
                     @endif

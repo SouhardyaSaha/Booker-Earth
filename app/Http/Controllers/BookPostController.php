@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\BookPost;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class BookPostController extends Controller
 {
@@ -14,9 +15,15 @@ class BookPostController extends Controller
      */
     public function index()
     {
-        $bookPosts = BookPost::with('user')->latest()->paginate(env('PAGINATE', 10));
+        $searchInput = Input::get('search');
+        if($searchInput != ""){
+            $bookPosts = BookPost::where('title' , 'LIKE', '%' . $searchInput . '%')->paginate(env('PAGINATE', 10));
+        }
+        else{
+            $bookPosts = BookPost::with('user')->latest()->paginate(env('PAGINATE', 10));
+        }
         
-        return view('book-posts.index', compact('bookPosts'));
+        return view('book-posts.index', compact('bookPosts', 'searchInput'));
     }
 
     /**
@@ -43,18 +50,19 @@ class BookPostController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the searched resource.
      *
      * @param  \App\BookPost  $bookPost
      * @return \Illuminate\Http\Response
      */
     public function search(Request $request)
     {
-        $searchinput = $request->input('search');
-        $bookPosts = BookPost::where('title' , 'LIKE', '%' . $searchinput . '%')->get();
-        // $bookPosts->paginate(env('PAGINTAE', 10));
+        return 1234;
+        // $searchinput = $request->input('search');
+        // $bookPosts = BookPost::where('title' , 'LIKE', '%' . $searchinput . '%')->paginate(env('PAGINATE', 10));
+        // // $bookPosts->paginate(env('PAGINTAE', 10));
 
-        return view('book-posts.search', compact('bookPosts'));
+        // return view('book-posts.search', compact('bookPosts'));
     }
     
 
