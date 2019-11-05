@@ -1,36 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+{{-- <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            {{-- search Bar --}}
-            <form class="form-horizontal" method="GET" action="{{ url('book-posts') }}">
-                {{ csrf_field() }}
-
-                <div class="form-group{{ $errors->has('search') ? ' has-error' : '' }}">
-                    <label for="search" class="col-md-4 control-label"><i class="fa fa-search fa-2x"></i></label>
-
-                    <div class="col-md-6" >
-                        <input id="search" type="text"  class="form-control" name="search" value = {{$searchInput}}>
-                        {{-- value="{{ old('search') }}" required autofocus --}}
-
-                        @if ($errors->has('search'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('search') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                </div>
-                {{-- <div class="form-group">
-                        <div class="col-md-6 col-md-offset-4">
-                            <button type="submit" class="btn btn-primary">
-                                Search
-                            </button>
-                        </div>
-                </div> --}}
-            </form>
             <div class="panel panel-default">
+                
                 <div class="panel-heading">Book Posts</div>
                 <div class="panel-body">
                         
@@ -51,9 +26,44 @@
                     @else
                         <p>No record found.</p>
                     @endif
+                    
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
+
+    <div class="container">
+    {{-- Thumbnails starts --}}
+    {{-- search Bar --}}
+    <center>  
+            @include('include.searchbox')
+    </center>
+    <div class="panel panel-default">
+        
+    <div class="panel-heading">Book Posts</div>
+    <div class="panel-body">
+    @if(!$bookPosts->isEmpty())
+        @foreach($bookPosts as $bookPost)
+            <div class="col-xs-6 col-md-3">
+                <div class="thumbnail">
+                    <img src = {{$bookPost->image_uri}} class="img-thumbnail" >
+                    <div class="caption ">
+                        <center>
+                            <b>Book:</b>  {{ $bookPost->title }} <br>
+                            <b>Author</b> : {{ $bookPost->author }} <hr>
+                        </center>
+                        <span class="pull-right"><small><strong>Posted by:</strong> {{ $bookPost->user->name }}</small></span>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    @else
+        <p>No record found.</p>
+    @endif
+</div>
+</div>
+    {{-- Thumnails end --}}
+    <center>{{ $bookPosts->links() }}</center>
 </div>
 @endsection
