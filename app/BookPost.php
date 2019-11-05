@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class BookPost extends Model
 {
     protected $fillable = [
-        'title', 'edition', 'author',
+        'title', 'edition', 'author', 
     ];
     
     public function user() {

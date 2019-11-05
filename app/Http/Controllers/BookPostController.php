@@ -17,10 +17,10 @@ class BookPostController extends Controller
     {
         $searchInput = Input::get('search');
         if($searchInput != ""){
-            $bookPosts = BookPost::where('title' , 'LIKE', '%' . $searchInput . '%')->paginate(env('PAGINATE', 10));
+            $bookPosts = BookPost::where('title' , 'LIKE', '%' . $searchInput . '%')->paginate(16);
         }
         else{
-            $bookPosts = BookPost::with('user')->latest()->paginate(env('PAGINATE', 10));
+            $bookPosts = BookPost::with('user')->latest()->paginate(16);
         }
         
         return view('book-posts.index', compact('bookPosts', 'searchInput'));
