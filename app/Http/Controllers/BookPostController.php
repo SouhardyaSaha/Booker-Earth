@@ -47,24 +47,7 @@ class BookPostController extends Controller
         auth()->user()->bookPosts()->create($request->all());
         
         return redirect('book-posts');
-    }
-
-    /**
-     * Display the searched resource.
-     *
-     * @param  \App\BookPost  $bookPost
-     * @return \Illuminate\Http\Response
-     */
-    public function search(Request $request)
-    {
-        return 1234;
-        // $searchinput = $request->input('search');
-        // $bookPosts = BookPost::where('title' , 'LIKE', '%' . $searchinput . '%')->paginate(env('PAGINATE', 10));
-        // // $bookPosts->paginate(env('PAGINTAE', 10));
-
-        // return view('book-posts.search', compact('bookPosts'));
-    }
-    
+    }    
 
     /**
      * Display the specified resource.
