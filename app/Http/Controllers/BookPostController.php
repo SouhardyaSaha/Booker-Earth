@@ -44,8 +44,34 @@ class BookPostController extends Controller
      */
     public function store(Request $request)
     {
-        auth()->user()->bookPosts()->create($request->all());
         
+        $this->validate($request, [
+            'image' => 'image|nullable|max:1999'
+        ]);
+
+        // auth()->user()->bookPosts()->create($request->all());
+        
+        // Handle Image Upload
+        if ($request->hasFile('image')) {
+            $fileNameWithExt = $request->file('image')->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('image')->getClientOriginalExtension();
+
+            $fileNameToStore = $fileName.'_'.time().'.'.$extension;
+
+            $path = $request->file('image')->storeAs('public/book_post/images', $fileNameToStore);
+
+        }else{
+            $fileNameToStore = 'noimage.png';
+        }
+
+        $bookPost = new BookPost;
+        $bookPost->title = $request->input('title');
+        $bookPost->author = $request->input('author');
+        $bookPost->edition = $request->input('edition');
+        $bookPost->user_id = auth()->user()->id;
+        $bookPost->image_uri = $fileNameToStore;
+        $bookPost->save();
         return redirect('book-posts');
     }    
 

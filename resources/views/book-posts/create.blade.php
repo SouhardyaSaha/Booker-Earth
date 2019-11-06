@@ -8,7 +8,7 @@
                 <div class="panel-heading">Book Posts (Create)</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ url('book-posts') }}">
+                    <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="{{ url('book-posts') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
@@ -48,6 +48,19 @@
                                 @if ($errors->has('author'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('author') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
+                            <label for="image" class="col-md-4 control-label">Image</label>
+
+                        <div class="col-md-6">
+                            <input id="image" type="file" class="form-control" name="image" value="{{ old('image') }}" autofocus>
+                                @if ($errors->has('image'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('image') }}</strong>
                                     </span>
                                 @endif
                             </div>
