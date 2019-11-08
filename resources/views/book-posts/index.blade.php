@@ -47,7 +47,7 @@
         @foreach($bookPosts as $bookPost)
             <div class="col-xs-6 col-md-3">
                 <div class="thumbnail">
-                    <img src = "storage/book_post/images/{{$bookPost->image_uri}}" class="img-thumbnail" style="width:250px;height:300px;">
+                    <img src = "{{$bookPost->image_uri}}" class="img-thumbnail" style="width:250px;height:300px;">
                     <div class="caption ">
                         <center>
                             <b>Book:</b>  {{ $bookPost->title }} <br>

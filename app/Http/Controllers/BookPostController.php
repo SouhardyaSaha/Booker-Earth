@@ -60,7 +60,6 @@ class BookPostController extends Controller
             $fileNameToStore = $fileName.'_'.time().'.'.$extension;
 
             $path = $request->file('image')->storeAs('public/book_post/images', $fileNameToStore);
-
         }else{
             $fileNameToStore = 'noimage.png';
         }
@@ -70,7 +69,8 @@ class BookPostController extends Controller
         $bookPost->author = $request->input('author');
         $bookPost->edition = $request->input('edition');
         $bookPost->user_id = auth()->user()->id;
-        $bookPost->image_uri = $fileNameToStore;
+        // $bookPost->image_uri = $fileNameToStore;
+        $bookPost->image_uri = 'storage/book_post/images/'.$fileNameToStore;
         $bookPost->save();
         return redirect('book-posts');
     }    
