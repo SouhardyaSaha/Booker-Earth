@@ -1,36 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-{{-- <div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                
-                <div class="panel-heading">Book Posts</div>
-                <div class="panel-body">
-                        
-                    @if(!$bookPosts->isEmpty())
-                        <ul>
-                            @foreach($bookPosts as $bookPost)
-                                <li>
-                                    {{ $bookPost->title . ', ' . $bookPost->edition }}<br>
-                                    by {{ $bookPost->author }}
-                                    
-                                    <span class="pull-right"><small><strong>Posted by:</strong> {{ $bookPost->user->name }}</small></span>
-                                    <hr>
-                                </li>
-                            @endforeach
-                        </ul>
-                        
-                        <center>{{ $bookPosts->links() }}</center>
-                    @else
-                        <p>No record found.</p>
-                    @endif
-                    
-                </div>
-            </div>
-        </div>
-    </div> --}}
 
     <div class="container">
     {{-- Thumbnails starts --}}
@@ -46,15 +16,16 @@
     @if(!$bookPosts->isEmpty())
         @foreach($bookPosts as $bookPost)
             <div class="col-xs-6 col-md-3">
-                <div class="thumbnail">
+                <div class="thumbnail" style="min-height: 500px;">
                     <img src = "{{$bookPost->image_uri}}" class="img-thumbnail" style="width:250px;height:300px;">
                     <div class="caption ">
                         <center>
                             <b>Book:</b>  {{ $bookPost->title }} <br>
-                            <b>Author</b> : {{ $bookPost->author }} <hr>
+                            <b>Author</b> : {{ $bookPost->author }}
+
                         </center>
-                        <span class="pull-right"><small><strong>Posted by:</strong> {{ $bookPost->user->name }}</small></span>
-                        <hr>
+                        <span class="pull-right"><small><strong>Posted by:</strong> {{ $bookPost->user->name }}</small></span><br>
+                        <span class="pull-right"><small><strong></strong><a href="/book-posts/{{ $bookPost->id }}/message">Message </a></small></span><br>
                     </div>
                 </div>
             </div>
