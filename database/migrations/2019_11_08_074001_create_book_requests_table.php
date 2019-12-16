@@ -33,3 +33,4 @@ class CreateBookRequestsTable extends Migration
         Schema::dropIfExists('book_requests');
     }
 }
+    
