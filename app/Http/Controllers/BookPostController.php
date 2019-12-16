@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\BookPost;
+use App\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
@@ -83,7 +84,7 @@ class BookPostController extends Controller
      */
     public function show(BookPost $bookPost)
     {
-        //
+        return 'work to be done';
     }
 
     /**
@@ -118,5 +119,27 @@ class BookPostController extends Controller
     public function destroy(BookPost $bookPost)
     {
         //
+    }
+
+    public function getMessage($id) {
+        $bookPost = BookPost::with('user')->findOrFail($id);
+        return view('book-posts.message', compact('bookPost'));
+    }
+
+    public function postMessage(Request $request){
+        $id = $request->get('book_post_id');
+        $bookPost = BookPost::with('user')->findOrFail($id);
+
+        $rec = $bookPost->user->id;
+        $sender = auth()->user()->id;
+        
+        $message = new Message;
+        $message->sender_id = $sender;
+        $message->receiver_id = $rec;
+        $message->msg_subject = $request->input('subject');
+        $message->msg_body = $request->input('msg');
+        // dd($message);
+        $message->save();
+        return redirect('book-posts');
     }
 }
