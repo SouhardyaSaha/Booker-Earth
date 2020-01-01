@@ -29,6 +29,12 @@ Route::resource('book-posts', 'BookPostController');
 // Route::post('book-posts/search', 'BookPostController@search');
 // Route::get('book-posts/search', 'BookPostController@search');
 
-Route::resource('messages', 'MessageController');
+// Messages
+Route::group(['prefix' => 'messages'], function() {
+    Route::get('send', 'MessageController@send');
+    Route::get('inbox', 'MessageController@inbox');
+});
+
+
 Route::get('book-posts/{id}/message', 'BookPostController@getMessage');
 Route::post('book-posts/{id}/message', 'BookPostController@postMessage');
