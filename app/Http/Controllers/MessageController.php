@@ -12,9 +12,12 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function inbox()
     {
-        return view('include.message');    
+        $messages = Message::with(['sender', 'receiver'])->whereReceiverId(auth()->user()->id)->latest()->paginate(env('PAGINATE_PER_PAGE',16));
+
+
+        return view('messages.index', compact('messages'));    
     }
 
     /**
@@ -22,9 +25,10 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function send()
     {
-        return 123;
+        $temporaryReceiver = \App\User::find(2);
+        return view('messages.send', compact('temporaryReceiver'));
     }
 
     /**
@@ -35,7 +39,14 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        return 456;
+        $message = new Message;
+        $message->sender_id = auth()->user()->id;
+        $message->receiver_id = $request->input('receiver_id');
+        $message->msg_subject = $request->input('subject');
+        $message->msg_body = $request->input('msg');
+        $message->save();
+        
+        return redirect('messages/inbox');
     }
 
     /**
@@ -46,7 +57,9 @@ class MessageController extends Controller
      */
     public function show(Message $message)
     {
-        //
+        $message->read_at = time();
+        $message->save();
+        return view('messages.show', compact('message'));
     }
 
     /**
@@ -55,10 +68,10 @@ class MessageController extends Controller
      * @param  \App\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function edit(Message $message)
-    {
-        //
-    }
+    // public function edit(Message $message)
+    // {
+    //     //
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -67,10 +80,10 @@ class MessageController extends Controller
      * @param  \App\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Message $message)
-    {
-        //
-    }
+    // public function update(Request $request, Message $message)
+    // {
+    //     //
+    // }
 
     /**
      * Remove the specified resource from storage.
@@ -78,8 +91,8 @@ class MessageController extends Controller
      * @param  \App\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Message $message)
-    {
-        //
-    }
+    // public function destroy(Message $message)
+    // {
+    //     //
+    // }
 }

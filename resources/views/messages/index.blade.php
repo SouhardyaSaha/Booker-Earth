@@ -5,22 +5,30 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Inbox</div>
+                <div class="panel-heading">Inbox
+                    <span class="pull-right"><strong><a href="{{ url('messages/send') }}">Send Message</a></strong></span>
+                    {{-- <a href="{{ url('messages/send') }}">Send Message</a> --}}
+                    
+                </div>
 
                 <div class="panel-body">
                     @if(!$messages->isEmpty())
                         <ul>
                             @foreach($messages as $message)
-                            
-                            <li>
-                                <b>From :   </b>{{ $message->sender->name }} <br>
-                                <b>Subject   :  </b> {{ $message->msg_subject}} <br>
-                                <b>Message   :  </b> {{  $message->msg_body }}<br>
-                                {{-- by {{ $bookRequest->author }} --}}
-                                
-                                {{-- <span class="pull-right"><small><strong>Requested by:</strong> {{ $bookRequest->user->name }}</small></span> --}}
-                                <hr>
-                            </li>
+                                @if ($message->read_at == NULL)
+                                    <b>
+                                @endif
+                                <li>
+                                    
+                                    From :   {{ $message->sender->name }} <br>
+                                    Subject   :   {{ $message->msg_subject}} <br>
+                                    Message   :   {{ str_limit($message->msg_body, $limit = 5, $end = '...') }}
+                                    <a href="inbox/{{$message->id}}">(show)</a><br>
+                                    <hr>
+                                </li>
+                                @if ($message->read_at == NULL)
+                                    </b>
+                                @endif
                             @endforeach
                         </ul>
                         

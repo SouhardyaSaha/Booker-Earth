@@ -107,6 +107,7 @@
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
+                                    <li><a href="{{ url('messages/inbox') }}">Inbox</a></li>
                                 </ul>
                             </li>
                         @endguest

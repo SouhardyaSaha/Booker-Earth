@@ -33,6 +33,8 @@ Route::resource('book-posts', 'BookPostController');
 Route::group(['prefix' => 'messages'], function() {
     Route::get('send', 'MessageController@send');
     Route::get('inbox', 'MessageController@inbox');
+    Route::get('inbox/{message}', 'MessageController@show');
+    Route::post('store', 'MessageController@store');
 });
 
 
