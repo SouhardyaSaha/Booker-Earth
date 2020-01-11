@@ -8,7 +8,7 @@
                 <div class="panel-heading">Message</div>
 
                 <div class="panel-body">
-                    {{$message->msg_body}}
+                    {{ $message->msg_body }}    
                 </div>
             </div>
         </div>

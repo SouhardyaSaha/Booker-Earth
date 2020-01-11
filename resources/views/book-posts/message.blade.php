@@ -49,6 +49,8 @@
                                 @endif
                             </div>
                         </div>
+                        
+                        <input type="hidden" name="book_post_id" value="{{ $bookPost->id }}">
 
                         <div class="form-group{{ $errors->has('subject') ? ' has-error' : '' }}">
                             <label for="subject" class="col-md-4 control-label">Subject</label>
@@ -56,7 +58,6 @@
                             <div class="col-md-6">
 
                                 <input id="subject" type="text" class="form-control" name="subject" placeholder="Type your subject here..."  required autofocus>
-                                <input type="hidden" name="book_post_id" value="{{ $bookPost->id }}">
                                 @if ($errors->has('subject'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('subject') }}</strong>

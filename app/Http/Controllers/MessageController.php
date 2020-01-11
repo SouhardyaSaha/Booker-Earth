@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Message;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
@@ -27,8 +28,8 @@ class MessageController extends Controller
      */
     public function send()
     {
-        $temporaryReceiver = \App\User::find(2);
-        return view('messages.send', compact('temporaryReceiver'));
+        $users = \App\User::all();
+        return view('messages.send', compact('users'));
     }
 
     /**
@@ -41,7 +42,7 @@ class MessageController extends Controller
     {
         $message = new Message;
         $message->sender_id = auth()->user()->id;
-        $message->receiver_id = $request->input('receiver_id');
+        $message->receiver_id = $request->receiver_id;
         $message->msg_subject = $request->input('subject');
         $message->msg_body = $request->input('msg');
         $message->save();
@@ -57,7 +58,7 @@ class MessageController extends Controller
      */
     public function show(Message $message)
     {
-        $message->read_at = time();
+        $message->read_at = Carbon::now();
         $message->save();
         return view('messages.show', compact('message'));
     }

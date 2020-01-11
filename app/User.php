@@ -32,6 +32,18 @@ class User extends Authenticatable
         return $this->hasMany(BookRequest::class);
     }
 
+    public function receivedMessages(){
+        return $this->hasMany(Message::class, 'receiver_id');
+    }
+
+    public function sentMessages(){
+        return $this->hasMany(Message::class, 'sender_id');
+    }
+
+    public function unreadMessages(){
+        return $this->hasMany(Message::class, 'sender_id');
+    }
+
     public function bookPosts() {
         return $this->hasMany(BookPost::class);
     }

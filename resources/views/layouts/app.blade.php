@@ -13,7 +13,11 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     {{-- Font Awesome Cdm --}}
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    {{-- Select 2 cdn --}}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 <body>
     <div id="app">
@@ -35,73 +39,41 @@
                     </a>
                 </div>
 
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        @guest
-                            <li><a href="{{ url('book-requests') }}">Book Requests</a></li>
-                            <li><a href="{{ url('book-posts') }}">Book Posts</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
-                                    Book Requests <span class="caret"></span>
-                                </a>
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
+    {{-- select2 script --}}
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
+</body>
 
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <li><a href="{{ url('book-requests/create') }}">Add</a></li>
-                                        <li><a href="{{ url('book-requests') }}">List</a></li>
-                                    </li>
-                                </ul>
-                            </li>
+<script type="text/javascript">
 
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
-                                    Book Posts <span class="caret"></span>
-                                </a>
+    $(document).ready(function () {
 
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <li><a href="{{ url('book-posts/create') }}">Add</a></li>
-                                        <li><a href="{{ url('book-posts') }}">List</a></li>
-                                    </li>
-                                </ul>
-                            </li>
+        $('#select-receiver').select2({
+            placeholder: 'Choose your contact',
+            allowClear: true,
+            minimumInputLength: 1,
+            ajax: {
+                url: '{{ route("messageReceivers") }}',
+                dataType: 'json',
+                data: function(param) {
+                    console.log(param);
+                    return {
+                        q: param.term
+                    }
+                },
+                processResults: function(data) {
+                    console.log(data);
+                    return {
+                        results: data
+                    }
+                },
+            },            
+            delay: 200,
+            cache: true,
+        });     
 
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
-                                    Messages <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <li><a href="{{ url('messages/inbox') }}">Inbox</a></li>
-                                        <li><a href="{{ url('messages/send') }}">Send Message</a></li>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endguest
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
+})
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
@@ -117,8 +89,7 @@
         </nav>
         <div style="height: 80px"></div>
 
-        @yield('content')
-    </div>
+</script>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script> 

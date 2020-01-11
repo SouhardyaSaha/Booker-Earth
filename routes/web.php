@@ -36,7 +36,8 @@ Route::group(['prefix' => 'messages'], function() {
     Route::get('inbox/{message}', 'MessageController@show');
     Route::post('store', 'MessageController@store');
 });
-
-
+Route::get('api/users', 'ApiController@getUsers')->name('messageReceivers');
 Route::get('book-posts/{id}/message', 'BookPostController@getMessage');
 Route::post('book-posts/{id}/message', 'BookPostController@postMessage');
+
+Route::get('api/users', 'ApiController@getUsers')->name('messageReceivers');
