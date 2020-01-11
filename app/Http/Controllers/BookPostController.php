@@ -3,12 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\BookPost;
+use App\Comment;
 use App\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 class BookPostController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -84,7 +92,8 @@ class BookPostController extends Controller
      */
     public function show(BookPost $bookPost)
     {
-        return 'work to be done';
+        $comments = Comment::where('bookPost_id','=',$bookPost->id)->latest()->paginate(10);
+        return view('book-posts.show', compact('bookPost', 'comments'));
     }
 
     /**

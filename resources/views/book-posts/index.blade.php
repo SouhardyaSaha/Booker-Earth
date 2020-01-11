@@ -4,8 +4,8 @@
 
     <div class="container">
     {{-- Thumbnails starts --}}
+    
     {{-- search Bar --}}
-
     <center>  
             @include('include.searchbox')
     </center>
@@ -20,7 +20,7 @@
                     <img src = "{{$bookPost->image_uri}}" class="img-thumbnail" style="width:250px;height:300px;">
                     <div class="caption ">
                         <center>
-                            <b>Book:</b>  {{ $bookPost->title }} <br>
+                            <b>Book:</b> <a href="/book-posts/{{ $bookPost->id }}"> {{ $bookPost->title }} </a> <br>
                             <b>Author</b> : {{ $bookPost->author }}
 
                         </center>

@@ -26,6 +26,9 @@ Route::get('book-requests/create', 'BookRequestsController@create');
 
 // Book Post
 Route::resource('book-posts', 'BookPostController');
+
+// Book Post Comment
+Route::post('comment', 'CommentController@store');
 // Route::post('book-posts/search', 'BookPostController@search');
 // Route::get('book-posts/search', 'BookPostController@search');
 
@@ -39,5 +42,3 @@ Route::group(['prefix' => 'messages'], function() {
 Route::get('api/users', 'ApiController@getUsers')->name('messageReceivers');
 Route::get('book-posts/{id}/message', 'BookPostController@getMessage');
 Route::post('book-posts/{id}/message', 'BookPostController@postMessage');
-
-Route::get('api/users', 'ApiController@getUsers')->name('messageReceivers');
