@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class BookRequestsController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index']]);
+    }
+
     public function index() {
         $bookRequests = BookRequest::with('user')->latest()->paginate(env('PAGINATE', 10));
         

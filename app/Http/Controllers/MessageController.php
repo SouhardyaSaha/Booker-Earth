@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class MessageController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -39,7 +44,7 @@ class MessageController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    { 
         $message = new Message;
         $message->sender_id = auth()->user()->id;
         $message->receiver_id = $request->receiver_id;
