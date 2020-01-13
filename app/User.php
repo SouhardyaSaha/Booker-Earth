@@ -47,4 +47,16 @@ class User extends Authenticatable
     public function bookPosts() {
         return $this->hasMany(BookPost::class);
     }
+
+    public function isAdmin(){
+        return $this->role_id == 1;
+    }
+
+    public function isPublisher(){
+        return $this->role_id == 2;
+    }
+
+    public function isUser(){
+        return $this->role_id == 3;
+    }
 }
