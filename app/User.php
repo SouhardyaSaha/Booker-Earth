@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'mobile_number'
+        'name', 'email', 'password', 'mobile_number', 'is_banned'
     ];
 
     /**
@@ -59,4 +59,13 @@ class User extends Authenticatable
     public function isUser(){
         return $this->role_id == 3;
     }
+
+    // get the users except the signed one for message recipient
+    public function scopeRecipients($query, $q, User $except) {
+        return $query->where('id', '!=', $except->id)
+            ->where(function($query) use($q) {
+                $query->where('name', 'LIKE', "%{$q}%");
+            });
+    }
+
 }
