@@ -39,9 +39,14 @@ Route::group(['prefix' => 'messages'], function() {
     Route::get('inbox/{message}', 'MessageController@show');
     Route::post('store', 'MessageController@store');
 });
-Route::get('api/users', 'ApiController@getUsers')->name('messageReceivers');
+Route::get('api/users', 'ApiController@getUsers')->name('getUsers');
 Route::get('book-posts/{id}/message', 'BookPostController@getMessage');
 Route::post('book-posts/{id}/message', 'BookPostController@postMessage');
 
+
+// Routes For Admin
+Route::get('users', 'AdminController@getUsers');
 Route::post('ban/user', 'AdminController@banUser')->name('banUser');
 //Creating User from admin Routes
+Route::get('create/user', 'AdminController@createUser');
+Route::post('create/user/post', 'AdminController@storeUser')->name('registerUserFromAdmin');
