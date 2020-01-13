@@ -44,7 +44,7 @@
             allowClear: true,
             minimumInputLength: 1,
             ajax: {
-                url: '{{ route("messageReceivers") }}',
+                url: '{{ route("getUsers") }}',
                 dataType: 'json',
                 data: function(param) {
                     console.log(param);
