@@ -26,10 +26,10 @@ class BookPostController extends Controller
     {
         $searchInput = Input::get('search');
         if($searchInput != ""){
-            $bookPosts = BookPost::where('title' , 'LIKE', '%' . $searchInput . '%')->paginate(env('PAGINATE_PER_PAGE', 16));
+            $bookPosts = BookPost::with('bookPostOwner')->where('title' , 'LIKE', '%' . $searchInput . '%')->paginate(env('PAGINATE_PER_PAGE', 16));
         }
         else{
-            $bookPosts = BookPost::with('user')->latest()->paginate(env('PAGINATE_PER_PAGE', 16));
+            $bookPosts = BookPost::with('bookPostOwner')->latest()->paginate(env('PAGINATE_PER_PAGE', 16));
         }
         
         return view('book-posts.index', compact('bookPosts', 'searchInput'));
