@@ -11,8 +11,8 @@ class BookPost extends Model
         'title', 'edition', 'author', 
     ];
     
-    public function user() {
-        return $this->belongsTo(User::class);
+    public function bookPostOwner() {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function comment() {
