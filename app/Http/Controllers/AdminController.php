@@ -27,8 +27,8 @@ class AdminController extends Controller
         if ($user->is_banned) {
             $user->is_banned = false;
         }else{
-            $user->is_banned = true;
-            
+            $user->is_banned = true; 
+                       
         } 
         $user->save();
 
@@ -44,9 +44,16 @@ class AdminController extends Controller
 
     public function storeUser(Request $request){
         
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'mobile_number' => 'required',
+            'password' => 'required'
+        ]);
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->isCreatedByAdmin = true;
         $user->mobile_number = $request->mobile_number;
         $user->password = bcrypt($request->password);
 
