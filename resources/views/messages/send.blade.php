@@ -30,7 +30,7 @@
                         <div class="form-group{{ $errors->has('receiver') ? ' has-error' : '' }}">
                             <label for="receiver" class="col-md-4 control-label">Receiver</label>
                             <div class="col-md-6">
-                                <select id="select-receiver" class="form-control select2" name="receiver_id" required autofocus>
+                                <select id="select-receiver" class="form-control" style="width: 100%" name="receiver_id" required autofocus>
                                 </select>
                                 @if ($errors->has('receiver'))
                                 <span class="help-block">
