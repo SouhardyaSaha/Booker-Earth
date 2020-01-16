@@ -6,8 +6,7 @@
     {{-- Thumbnails starts --}}
     
     {{-- search Bar --}}
-    <center>  
-            {{-- @include('include.searchbox') --}}
+    <center>
         <form class="form-horizontal" method="GET" action="{{ url('users') }}">
     
     
@@ -39,9 +38,15 @@
                 <div class="thumbnail">
                     <div class="caption ">
                         <center>
-                            <b>Name: </b> {{ $user->name }} <br>
+                            <b>Name: </b> {{ $user->name }}
+                            @if ($user->isCreatedByAdmin)
+                                <span style="color: lightcoral"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
+                            
+                            @endif
+                            <br>
+                                
                         </center>
-                        <span class="pull-right"><small><strong><a href="/messages/send">Message</a></strong></small></span><br><br>
+                        <span class="pull-right"><small><strong><a href="/messages/send">Message</a></strong></small></span><br>
                         
                         <span class="pull-right"><small><strong>
                             <form method="POST" action="{{ route('banUser') }}">

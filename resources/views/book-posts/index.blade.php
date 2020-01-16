@@ -3,7 +3,6 @@
 @section('content')
 
     <div class="container">
-    {{-- Thumbnails starts --}}
     
     {{-- search Bar --}}
     <center>  
@@ -20,11 +19,14 @@
                     <img src = "{{$bookPost->image_uri}}" class="img-thumbnail" style="width:250px;height:300px;">
                     <div class="caption ">
                         <center>
-                            <b>Book:</b> <a href="/book-posts/{{ $bookPost->id }}"> {{ $bookPost->title }} </a> <br>
+                            <b>Book:</b> <a href="/book-posts/{{ $bookPost->id }}"> {{ $bookPost->title }} </a>
+                            @if ($bookPost->bookPostOwner->isCreatedByAdmin)
+                                <span style="color: lightcoral"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
+                            @endif <br>
                             <b>Author</b> : {{ $bookPost->author }}
 
                         </center>
-                        <span class="pull-right"><small><strong>Posted by:</strong> {{ $bookPost->user->name }}</small></span><br>
+                        <span class="pull-right"><small><strong>Posted by:</strong> {{ $bookPost->bookPostOwner->name }}</small></span><br>
                         <span class="pull-right"><small><strong></strong><a href="/book-posts/{{ $bookPost->id }}/message">Message </a></small></span><br>
                     </div>
                 </div>

@@ -49,4 +49,4 @@ Route::get('users', 'AdminController@getUsers');
 Route::post('ban/user', 'AdminController@banUser')->name('banUser');
 //Creating User from admin Routes
 Route::get('create/user', 'AdminController@createUser');
-Route::post('create/user/post', 'AdminController@storeUser')->name('registerUserFromAdmin');
+Route::post('create/user', 'AdminController@storeUser')->name('registerUserFromAdmin');
