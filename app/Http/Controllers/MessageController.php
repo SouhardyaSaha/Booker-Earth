@@ -23,7 +23,15 @@ class MessageController extends Controller
         $messages = Message::with(['sender', 'receiver'])->whereReceiverId(auth()->user()->id)->latest()->paginate(env('PAGINATE_PER_PAGE',16));
 
 
-        return view('messages.index', compact('messages'));    
+        return view('messages.inbox', compact('messages'));    
+    }
+
+    public function outbox()
+    {
+        $messages = Message::with(['sender', 'receiver'])->whereSenderId(auth()->user()->id)->latest()->paginate(env('PAGINATE_PER_PAGE',16));
+
+
+        return view('messages.outbox', compact('messages'));    
     }
 
     /**
