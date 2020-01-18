@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Book Requests</div>
+                <div class="panel-heading">My Book Requests</div>
 
                 <div class="panel-body">
                     @if(!$bookRequests->isEmpty())
@@ -18,10 +18,6 @@
                                     @if ( auth()->user()->id  != $bookRequest->user->id)
                                         <a href="/book-requests/{{ $bookRequest->id }}/message">(Message)</a>                                        
                                     @endif
-
-                                    @if ( auth()->user()->id  == $bookRequest->user->id)
-                                        <a href="book-requests/{{ $bookRequest->id }}/delete">(Delete)</a>                                        
-                                     @endif
                                     <span class="pull-right"><small><strong>Requested by:</strong> {{ $bookRequest->user->name }}</small></span>
                                     <hr>
                                 </li>

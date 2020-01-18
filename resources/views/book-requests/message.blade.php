@@ -8,14 +8,14 @@
                 <div class="panel-heading">Message</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST"  action="{{ url('book-posts/$bookPost->id/message') }}">
+                    <form class="form-horizontal" method="POST"  action="{{ url('book-requests/$bookRequest->id/message') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('receiver') ? ' has-error' : '' }}">
                             <label for="receiver" class="col-md-4 control-label">Receiver</label>
 
                             <div class="col-md-6">
-                                <input id="receiver" type="text" class="form-control" name="receiver" value="{{ $bookPost->bookPostOwner->name }}" required autofocus readonly>
+                                <input id="receiver" type="text" class="form-control" name="receiver" value="{{ $bookRequest->user->name }}" required autofocus readonly>
                                 @if ($errors->has('receiver'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('receiver') }}</strong>
@@ -31,17 +31,20 @@
                                 <input id="Sender" type="text" class="form-control" name="Sender" value="{{ Auth::user()->name }}" required autofocus readonly>
                                 @if ($errors->has('Sender'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('Sender') }}</strong>
+                                        <strong>{{ $errors->first('receiver') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
+                        
+                        <input type="hidden" name="book_post_id" value="{{ $bookRequest->id }}">
 
                         <div class="form-group{{ $errors->has('subject') ? ' has-error' : '' }}">
-                            <label for="book_name" class="col-md-4 control-label">Subject</label>
+                            <label for="subject" class="col-md-4 control-label">Subject</label>
 
                             <div class="col-md-6">
-                                <input id="subject" type="text" class="form-control" name="subject" value="{{ $bookPost->title }}" required autofocus>
+
+                                <input id="subject" type="text" class="form-control" name="subject" value=" Regarding {{ $bookRequest->title }} "  required autofocus>
                                 @if ($errors->has('subject'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('subject') }}</strong>
@@ -49,8 +52,6 @@
                                 @endif
                             </div>
                         </div>
-                        
-                        <input type="hidden" name="book_post_id" value="{{ $bookPost->id }}">
 
                         <div class="form-group{{ $errors->has('msg') ? ' has-error' : '' }}">
                             <label for="msg" class="col-md-4 control-label">Message</label>

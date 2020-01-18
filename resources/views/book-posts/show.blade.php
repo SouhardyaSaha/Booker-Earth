@@ -11,10 +11,13 @@
                         <table class="table">
                             
                             <tbody>
-                                <tr align="center">
-                                    <img src = '{{$bookPost->image_uri}}' class="img-thumbnail" style="width:250px;height:300px;">
+                                <tr>
+                                    <center>
+                                        <img src = '{{ url($bookPost->image_uri) }}' class="img-thumbnail" style="width:250px;height:300px;">
+                                    </center>
                                 </tr>
-                                <br><br><br>
+                                <a href="{{ $bookPost->id }}/delete">Delete</a>
+                                <br><br>
                                 <tr>
                                     <td></td>
                                     <th scope="row"><b>Book: </b></th>
@@ -23,7 +26,7 @@
                                 <tr>
                                     <td></td>
                                     <th scope="row"><b>Post By: </b></th>
-                                    <td>{{$bookPost->user->name}}</td>
+                                    <td>{{$bookPost->bookPostOwner->name}}</td>
                                 </tr>
                                 <tr>
                                     <td></td>
