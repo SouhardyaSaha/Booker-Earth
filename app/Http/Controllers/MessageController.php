@@ -53,6 +53,12 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     { 
+
+        $this->validate($request, [
+            'subject' => 'required',
+            'msg' => 'required',
+        ]);
+
         $message = new Message;
         $message->sender_id = auth()->user()->id;
         $message->receiver_id = $request->receiver_id;
