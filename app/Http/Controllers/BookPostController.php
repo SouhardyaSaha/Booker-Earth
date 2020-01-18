@@ -81,7 +81,7 @@ class BookPostController extends Controller
         // $bookPost->image_uri = $fileNameToStore;
         $bookPost->image_uri = 'storage/book_post/images/'.$fileNameToStore;
         $bookPost->save();
-        return redirect('book-posts');
+        return redirect('book-posts')->with('success','Book Post Created');
     }    
 
     /**

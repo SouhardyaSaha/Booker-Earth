@@ -24,9 +24,12 @@
 <body>
     <div id="app">
         @include('include.navbar')
+        
         <div style="height: 80px"></div>
-
-        @yield('content')
+        <div class="container">
+            @include('include.messages')
+            @yield('content')
+        </div>
     </div>
 
     <!-- Scripts -->
