@@ -134,7 +134,7 @@ class BookPostController extends Controller
         }
 
         $bookPost->delete();
-        return redirect('book-posts');
+        return redirect('book-posts')->with('success','Post Deleted');;
     }
 
     
@@ -157,7 +157,7 @@ class BookPostController extends Controller
         $message->msg_body = $request->input('msg');
         // dd($message);
         $message->save();
-        return redirect('book-posts');
+        return redirect('book-posts')->with('success','Message Send please wait for reply');
     }
 
 
