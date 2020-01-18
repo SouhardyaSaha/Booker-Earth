@@ -32,6 +32,7 @@
                             <li>
                                 <li><a href="{{ url('book-requests/create') }}">Add</a></li>
                                 <li><a href="{{ url('book-requests') }}">List</a></li>
+                                <li><a href="{{ route('myBookRequests') }}">My Book Requests</a></li>
                             </li>
                         </ul>
                     </li>
@@ -45,6 +46,7 @@
                             <li>
                                 <li><a href="{{ url('book-posts/create') }}">Add</a></li>
                                 <li><a href="{{ url('book-posts') }}">List</a></li>
+                                <li><a href="{{ url('book-posts/my-book-posts') }}">My Book Posts</a></li>
                             </li>
                         </ul>
                     </li>
@@ -56,8 +58,9 @@
 
                         <ul class="dropdown-menu">
                             <li>
-                                <li><a href="{{ url('messages/inbox') }}">Inbox</a></li>
                                 <li><a href="{{ url('messages/send') }}">Send Message</a></li>
+                                <li><a href="{{ url('messages/inbox') }}">Inbox</a></li>
+                                <li><a href="{{ url('messages/outbox') }}">Outbox</a></li>
                             </li>
                         </ul>
                     </li>

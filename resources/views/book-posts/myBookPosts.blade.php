@@ -3,11 +3,6 @@
 @section('content')
 
     <div class="container">
-    
-    {{-- search Bar --}}
-    <center>  
-            @include('include.searchbox')
-    </center>
     <div class="panel panel-default">
         
     <div class="panel-heading">Book Posts</div>
@@ -16,7 +11,7 @@
         @foreach($bookPosts as $bookPost)
             <div class="col-xs-6 col-md-3">
                 <div class="thumbnail" style="min-height: 500px;">
-                    <img src = "{{$bookPost->image_uri}}" class="img-thumbnail" style="width:250px;height:300px;">
+                    <img src = "{{url($bookPost->image_uri)}}" class="img-thumbnail" style="width:250px;height:300px;">
                     <div class="caption ">
                         <p class="text-center">
                             <strong><a href="/book-posts/{{ $bookPost->id }}"> {{ $bookPost->title }}</a></strong>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PasswordGenerated;
 
 class AdminController extends Controller
 {
@@ -47,15 +49,17 @@ class AdminController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'mobile_number' => 'required',
-            'password' => 'required'
+            'mobile_number' => 'required|unique:users',
         ]);
+
+        $randomPassword = str_random(8);
+
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
         $user->isCreatedByAdmin = true;
         $user->mobile_number = $request->mobile_number;
-        $user->password = bcrypt($request->password);
+        $user->password = bcrypt($randomPassword);
 
         switch ($request->user_type) {
             case 'Admin':
@@ -80,6 +84,8 @@ class AdminController extends Controller
         }
 
         $user->save();
+
+        Mail::to($user->email)->send(new PasswordGenerated($user->name, $randomPassword));
 
         return redirect('users');
     

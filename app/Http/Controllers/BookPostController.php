@@ -125,21 +125,29 @@ class BookPostController extends Controller
      * @param  \App\BookPost  $bookPost
      * @return \Illuminate\Http\Response
      */
-    public function destroy(BookPost $bookPost)
+    public function destroy($id)
     {
-        //
+        $bookPost = BookPost::whereId($id)->whereUserId(auth()->user()->id)->whereNull('deleted_at')->first();
+
+        if (is_null($bookPost)) {
+            return redirect()->back();
+        }
+
+        $bookPost->delete();
+        return redirect('book-posts');
     }
 
+    
     public function getMessage($id) {
-        $bookPost = BookPost::with('user')->findOrFail($id);
+        $bookPost = BookPost::with('bookPostOwner')->findOrFail($id);
         return view('book-posts.message', compact('bookPost'));
     }
-
+    
     public function postMessage(Request $request){
         $id = $request->get('book_post_id');
-        $bookPost = BookPost::with('user')->findOrFail($id);
-
-        $rec = $bookPost->user->id;
+        $bookPost = BookPost::with('bookPostOwner')->findOrFail($id);
+        
+        $rec = $bookPost->bookPostOwner->id;
         $sender = auth()->user()->id;
         
         $message = new Message;
@@ -150,5 +158,13 @@ class BookPostController extends Controller
         // dd($message);
         $message->save();
         return redirect('book-posts');
+    }
+
+
+    public function myBookPosts(Request $request) {
+
+        $bookPosts = BookPost::whereUserId(auth()->user()->id)->withTrashed()->paginate(16);
+
+        return view('book-posts.myBookPosts', compact('bookPosts'));
     }
 }

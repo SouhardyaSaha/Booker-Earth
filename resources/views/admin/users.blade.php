@@ -29,7 +29,7 @@
     <div class="panel panel-default">
         
     <div class="panel-heading"><center><b>Users</b></center></div>
-    <a href="create/user">Create User</a>
+    <a class="btn btn-primary" href="create/user">Create User</a>
     <div class="panel-body">
     @if(!$users->isEmpty())
 
