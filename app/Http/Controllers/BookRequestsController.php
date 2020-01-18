@@ -28,4 +28,21 @@ class BookRequestsController extends Controller
         
         return redirect('book-requests');
     }
+
+    public function destroy(Request $request, $id) {
+        $bookRequest = BookRequest::whereId($id)->whereUserId(auth()->user()->id)->whereNull('deleted_at')->first();
+
+        if (is_null($bookRequest)) {
+            return redirect()->back();
+        }
+
+        $bookRequest->delete();
+        return redirect()->back();
+    }
+
+    public function getMessage($id) {
+        $bookRequest = BookRequest::with('user')->findOrFail($id);
+        return view('book-requests.message', compact('bookRequest'));
+    }
+
 }

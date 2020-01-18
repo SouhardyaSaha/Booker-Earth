@@ -20,11 +20,28 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 // Book Requests
-Route::get('book-requests', 'BookRequestsController@index');
-Route::post('book-requests', 'BookRequestsController@store');
-Route::get('book-requests/create', 'BookRequestsController@create');
+Route::group(['prefix' => 'book-requests'], function () {
+
+    Route::get('/', 'BookRequestsController@index');
+    Route::post('/', 'BookRequestsController@store');
+    Route::get('my-book-requests', 'BookRequestsController@myBookRequests')->name('myBookRequests');
+    Route::get('{id}/delete', 'BookRequestsController@destroy');
+    Route::get('create', 'BookRequestsController@create');
+    Route::get('{id}/message', 'BookRequestsController@getMessage')->name('bookRequestMessage');
+    Route::post('{id}/message', 'BookRequestsController@postMessage')->name('bookRequestMessage.submit');
+    
+});
+
 
 // Book Post
+Route::group(['prefix' => 'book-posts'], function () {
+    
+    Route::get('{id}/delete', 'BookPostController@destroy');
+    Route::get('{id}/message', 'BookPostController@getMessage');
+    Route::post('{id}/message', 'BookPostController@postMessage');
+    Route::get('my-book-posts', 'BookPostController@myBookPosts');
+    
+});
 Route::resource('book-posts', 'BookPostController');
 
 // Book Post Comment
@@ -36,12 +53,11 @@ Route::post('comment', 'CommentController@store');
 Route::group(['prefix' => 'messages'], function() {
     Route::get('send', 'MessageController@send');
     Route::get('inbox', 'MessageController@inbox');
+    Route::get('outbox', 'MessageController@outbox');
     Route::get('inbox/{message}', 'MessageController@show');
     Route::post('store', 'MessageController@store');
 });
 Route::get('api/users', 'ApiController@getUsers')->name('getUsers');
-Route::get('book-posts/{id}/message', 'BookPostController@getMessage');
-Route::post('book-posts/{id}/message', 'BookPostController@postMessage');
 
 
 // Routes For Admin

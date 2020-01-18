@@ -125,11 +125,19 @@ class BookPostController extends Controller
      * @param  \App\BookPost  $bookPost
      * @return \Illuminate\Http\Response
      */
-    public function destroy(BookPost $bookPost)
+    public function destroy($id)
     {
-        //
+        $bookPost = BookPost::whereId($id)->whereUserId(auth()->user()->id)->whereNull('deleted_at')->first();
+
+        if (is_null($bookPost)) {
+            return redirect()->back();
     }
 
+        $bookPost->delete();
+        return redirect('book-posts');
+    }
+
+    
     public function getMessage($id) {
         $bookPost = BookPost::with('user')->findOrFail($id);
         return view('book-posts.message', compact('bookPost'));
