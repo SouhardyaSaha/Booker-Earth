@@ -10,6 +10,12 @@ use App\Mail\PasswordGenerated;
 
 class AdminController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function getUsers(){
         $searchInput = Input::get('search');
         if($searchInput != ""){

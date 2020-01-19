@@ -11,7 +11,7 @@
             </button>
 
             <!-- Branding Image -->
-            <a class="navbar-brand" href="{{ url('/') }}">
+            <a class="navbar-brand" href="{{ url('book-posts') }}">
                 {{ config('app.name', 'Booker Earth') }}
             </a>
         </div>
@@ -101,6 +101,7 @@
                         </a>
 
                         <ul class="dropdown-menu">
+                            <li><a href="{{ url('home') }}">Profile</a></li>
                             <li>
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
@@ -112,7 +113,6 @@
                                     {{ csrf_field() }}
                                 </form>
                             </li>
-                            <li><a href="{{ url('messages/inbox') }}">Inbox</a></li>
                         </ul>
                     </li>
                 @endguest
