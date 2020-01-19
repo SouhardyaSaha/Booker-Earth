@@ -28,39 +28,34 @@
     </center>
     <div class="panel panel-default">
         
-    <div class="panel-heading"><center><b>Users</b></center></div>
-    <a class="btn btn-primary" href="create/user">Create User</a>
+    <div class="panel-heading"><b>Users</b>
+        <a class="btn btn-primary btn-sm pull-right" href="create/user">Create User</a>
+    </div>
     <div class="panel-body">
     @if(!$users->isEmpty())
-
         @foreach($users as $user)
-            <div class="col-xs-6 col-md-3">
-                <div class="thumbnail">
-                    <div class="caption ">
-                        <center>
-                            <b>Name: </b> {{ $user->name }}
-                            @if ($user->isCreatedByAdmin)
-                                <span style="color: lightcoral"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
-                            
-                            @endif
-                            <br>
-                                
-                        </center>
-                        <span class="pull-right"><small><strong><a href="/messages/send">Message</a></strong></small></span><br>
+            <div class="well">
+                <b>Name: </b> {{ $user->name }} 
+                @if ($user->isCreatedByAdmin)
+                    <span style="color: lightcoral"><i class="fa fa-check-circle" aria-hidden="true"></i></span>                
+                @endif
+                <br>
+                <b>Email: </b> {{ $user->email }} 
+
+                <span class="pull-right"><small><strong><a href="/messages/send">Message</a></strong></small></span><br>
                         
-                        <span class="pull-right"><small><strong>
-                            <form method="POST" action="{{ route('banUser') }}">
-                                {{ csrf_field() }}
-                                <input type="hidden" value=" {{ $user->id }} " name="user_id">
-                                @if ($user->is_banned)
-                                    <button  class="btn btn-success btn-sm" type="submit"><small> Activate User</small></button>
-                                @else
-                                    <button  class="btn btn-danger btn-sm" type="submit"><small> Deactivate User</small></button>
-                                @endif                                
-                            </form>
-                        </strong></small></span><br>
-                    </div>
-                </div>
+                    <span class="pull-right"><small><strong>
+                        <form method="POST" action="{{ route('banUser') }}">
+                            {{ csrf_field() }}
+                            <input type="hidden" value=" {{ $user->id }} " name="user_id">
+                            @if ($user->is_banned)
+                                <button  class="btn btn-success btn-sm" type="submit"><small> Activate User</small></button>
+                            @else
+                                <button  class="btn btn-danger btn-sm" type="submit"><small> Deactivate User</small></button>
+                            @endif                                
+                        </form>
+                        </strong></small>
+                    </span><br>
             </div>
         @endforeach
     @else
