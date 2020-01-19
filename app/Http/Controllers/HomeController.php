@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Message;
+use App\User;
 use Carbon\Carbon;
 
 class HomeController extends Controller
@@ -26,10 +27,11 @@ class HomeController extends Controller
 
     private function getAdminDasboard()
     {
-
         $message = 'you are logged in as Admin!';
+        $totalBannedUsers = User::whereIsBanned(true)->count();
+        $totalUsers = User::all()->count();
 
-        return compact('message');
+        return compact(['message', 'totalBannedUsers', 'totalUsers']);
     }
 
     private function getPublisherDasboard()
@@ -60,7 +62,6 @@ class HomeController extends Controller
                 'totalReceivedMessages' => auth()->user()->receivedMessages()->count(),
                 'totalSentMessages' => auth()->user()->sentMessages()->count(),
                 'totalUnreadMessages' => auth()->user()->unreadMessages()->count(),
-
             ],
 
         ];
@@ -73,10 +74,12 @@ class HomeController extends Controller
 
             case 2:
                 $data = array_merge($data, $this->getPublisherDasboard());
+
                 break;
 
             case 3:
                 $data = array_merge($data, $this->getUserDasboard());
+
                 break;
         }
 
