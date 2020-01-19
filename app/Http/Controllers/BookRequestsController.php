@@ -27,7 +27,7 @@ class BookRequestsController extends Controller
     public function store(Request $request) {
         auth()->user()->bookRequests()->create($request->all());
         
-        return redirect('book-requests')->with('success','Book Reques Created');
+        return redirect('book-requests')->with('success','Book Request Created');
     }
 
     public function destroy(Request $request, $id) {
