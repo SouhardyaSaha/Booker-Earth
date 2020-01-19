@@ -41,7 +41,7 @@ class User extends Authenticatable
     }
 
     public function unreadMessages(){
-        return $this->hasMany(Message::class, 'sender_id');
+        return $this->receivedMessages()->whereNull('read_at');
     }
 
     public function bookPosts() {
