@@ -59,7 +59,13 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <li><a href="{{ url('messages/send') }}">Send Message</a></li>
-                                <li><a href="{{ url('messages/inbox') }}">Inbox</a></li>
+                                <li>
+                                    <a href="{{ url('messages/inbox') }}">Inbox
+                                        @if (auth()->user()->unreadMessages()->count() > 0)
+                                            <span class="pull-right" style="font-style: oblique; color: crimson"  > {{ auth()->user()->unreadMessages()->count() }} </span>                                            
+                                        @endif
+                                    </a>
+                                </li>
                                 <li><a href="{{ url('messages/outbox') }}">Outbox</a></li>
                             </li>
                         </ul>

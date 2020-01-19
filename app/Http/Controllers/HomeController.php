@@ -59,8 +59,7 @@ class HomeController extends Controller
             'messages' => [
                 'totalReceivedMessages' => auth()->user()->receivedMessages()->count(),
                 'totalSentMessages' => auth()->user()->sentMessages()->count(),
-                'totalUnreadMessages' => auth()->user()->receivedMessages()->whereNull('read_at')->count(),
-                // 'totalUnreadMessages' => auth()->user()->receivedMessages()->unread()->count()
+                'totalUnreadMessages' => auth()->user()->unreadMessages()->count(),
 
             ],
 
