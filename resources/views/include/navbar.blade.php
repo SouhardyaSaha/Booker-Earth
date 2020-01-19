@@ -74,12 +74,13 @@
                     @if (auth()->user()->isAdmin())
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
-                                System <span class="caret"></span>
+                                User Management <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu">
                                 <li>
-                                    <li><a href="{{ url('users') }}">User Profiles</a></li>
+                                    <li><a href="{{ url('users') }}">All Users</a></li>
+                                    <li><a href="{{ url('bannedusers') }}">Suspended Users</a></li>
                                 </li>
                             </ul>
                         </li>
