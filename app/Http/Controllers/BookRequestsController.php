@@ -27,7 +27,7 @@ class BookRequestsController extends Controller
     public function store(Request $request) {
         auth()->user()->bookRequests()->create($request->all());
         
-        return redirect('book-requests');
+        return redirect('book-requests')->with('success','Book Reques Created');
     }
 
     public function destroy(Request $request, $id) {
@@ -38,7 +38,7 @@ class BookRequestsController extends Controller
         }
 
         $bookRequest->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success','Request Deleted');
     }
 
     public function getMessage($id) {
