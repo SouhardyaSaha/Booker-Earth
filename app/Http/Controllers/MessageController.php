@@ -66,7 +66,7 @@ class MessageController extends Controller
         $message->msg_body = $request->input('msg');
         $message->save();
         
-        return redirect('messages/inbox')->with('success','Message send');;
+        return redirect('messages/outbox')->with('success','Message sent');;
     }
 
     /**
