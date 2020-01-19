@@ -10,6 +10,12 @@ use App\Mail\PasswordGenerated;
 
 class AdminController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function getUsers(){
         $searchInput = Input::get('search');
         if($searchInput != ""){
@@ -20,6 +26,17 @@ class AdminController extends Controller
         }
 
         return view('admin.users', compact('users', 'searchInput'));
+    }
+
+    public function getBannedUsers(){
+        $searchInput = Input::get('search');
+        if($searchInput != ""){
+            $users = User::where('name' , 'LIKE', '%' . $searchInput . '%')->whereIsBanned(true)->paginate(env('PAGINATE_PER_PAGE', 16));
+        }
+        else{
+            $users = User::whereIsBanned(true)->latest()->paginate(env('PAGINATE_PER_PAGE', 16));
+        }
+        return view('admin.banned_users', compact('users', 'searchInput'));
     }
 
     public function banUser(Request $request){

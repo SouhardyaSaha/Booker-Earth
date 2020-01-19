@@ -7,7 +7,7 @@
     
     {{-- search Bar --}}
     <center>
-        <form class="form-horizontal" method="GET" action="{{ url('users') }}">
+        <form class="form-horizontal" method="GET" action="{{ url('bannedusers') }}">
     
     
             <div class="form-group{{ $errors->has('search') ? ' has-error' : '' }}">

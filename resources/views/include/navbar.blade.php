@@ -11,7 +11,7 @@
             </button>
 
             <!-- Branding Image -->
-            <a class="navbar-brand" href="{{ url('/') }}">
+            <a class="navbar-brand" href="{{ url('book-posts') }}">
                 {{ config('app.name', 'Booker Earth') }}
             </a>
         </div>
@@ -74,12 +74,13 @@
                     @if (auth()->user()->isAdmin())
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
-                                System <span class="caret"></span>
+                                User Management <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu">
                                 <li>
-                                    <li><a href="{{ url('users') }}">User Profiles</a></li>
+                                    <li><a href="{{ url('users') }}">All Users</a></li>
+                                    <li><a href="{{ url('bannedusers') }}">Suspended Users</a></li>
                                 </li>
                             </ul>
                         </li>
@@ -100,6 +101,7 @@
                         </a>
 
                         <ul class="dropdown-menu">
+                            <li><a href="{{ url('home') }}">Profile</a></li>
                             <li>
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
@@ -111,7 +113,6 @@
                                     {{ csrf_field() }}
                                 </form>
                             </li>
-                            <li><a href="{{ url('messages/inbox') }}">Inbox</a></li>
                         </ul>
                     </li>
                 @endguest

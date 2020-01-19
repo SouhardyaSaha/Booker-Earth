@@ -23,7 +23,11 @@
                             by <strong><i>{{ $bookPost->author }}</i></strong>
                         </p>
 
-                        <p class="text-right" style="margin-bottom: 0px;"><small><strong>Posted by:</strong> {{ $bookPost->bookPostOwner->name }}</small></p>
+                        <p class="text-right" style="margin-bottom: 0px;"><small><strong>Posted by:</strong> {{ $bookPost->bookPostOwner->name }}
+                            @if ($bookPost->bookPostOwner->isCreatedByAdmin)
+                                <span style="color: lightcoral"><i class="fa fa-check-circle" aria-hidden="true"></i></span>                
+                            @endif
+                        </small></p>
                         <p class="text-right"><small><strong><a href="/book-posts/{{ $bookPost->id }}/message">Message</a></small></strong></p>
                     </div>
                 </div>

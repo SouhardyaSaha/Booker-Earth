@@ -60,6 +60,7 @@ Route::get('api/users', 'ApiController@getUsers')->name('getUsers');
 
 // Routes For Admin
 Route::get('users', 'AdminController@getUsers');
+Route::get('bannedusers', 'AdminController@getBannedUsers');
 Route::post('ban/user', 'AdminController@banUser')->name('banUser');
 //Creating User from admin Routes
 Route::get('create/user', 'AdminController@createUser');
