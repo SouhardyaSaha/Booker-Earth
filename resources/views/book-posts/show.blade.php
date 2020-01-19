@@ -48,7 +48,7 @@
                                     </form>
                                   </div>
                                 </div>
-                              </div>
+                            </div>
                               
                                 <br><br>
                                 <tr>
@@ -77,7 +77,7 @@
                                     <td>{{$bookPost->created_at}}</td>
                                 </tr>
                             </tbody>
-                          </table>
+                        </table>
                         
                     </div>
 
