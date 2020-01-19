@@ -46,8 +46,6 @@ Route::resource('book-posts', 'BookPostController');
 
 // Book Post Comment
 Route::post('comment', 'CommentController@store');
-// Route::post('book-posts/search', 'BookPostController@search');
-// Route::get('book-posts/search', 'BookPostController@search');
 
 // Messages
 Route::group(['prefix' => 'messages'], function() {
