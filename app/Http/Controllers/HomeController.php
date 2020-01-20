@@ -83,7 +83,7 @@ class HomeController extends Controller
                 break;
         }
 
-       // dd($data);
+    //    dd($data);
         return view('home', $data);
     }
 }

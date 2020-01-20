@@ -1,0 +1,17 @@
+.dropdown-menu {
+    -webkit-transition: all .5s ease-out;
+    transition: all .5s ease-out;
+    transform: rotateX(90deg);
+    transform-origin: top;
+    opacity: 0;
+    display: block;
+    width: 100%;
+    border: none;
+}
+.open .dropdown-menu {
+    opacity: 1;
+    transform: rotateX(0deg);
+    transform-origin: top;
+    width: 100%;
+    border: none;
+}
