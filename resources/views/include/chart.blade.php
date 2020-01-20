@@ -73,8 +73,8 @@ const topFiveData = JSON.parse(topFiveUsersWithMostBookPosts);
 
 let labels = [], data=[];
 labels.push("You");
-var a=massPopChart.data.datasets[0].data[0];
-data.push(a);
+var UserBookPosts=massPopChart.data.datasets[0].data[0];
+data.push(UserBookPosts);
 
 topFiveData.map(item => {
   labels.push(item.name);
