@@ -53,7 +53,7 @@
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
-                            Messages
+                            Messages<span class="caret"></span>
                             @if (auth()->user()->unreadMessages()->count() > 0)
                              <span class="badge">{{auth()->user()->unreadMessages()->count()}}</span>
                             @endif
@@ -65,7 +65,7 @@
                                 <li>
                                     <a href="{{ url('messages/inbox') }}">Inbox
                                         @if (auth()->user()->unreadMessages()->count() > 0)
-                                            <span class="pull-right" style="font-style: oblique; color: crimson"  > {{ auth()->user()->unreadMessages()->count() }} </span>                                            
+                                            <span class="pull-right badge"> {{ auth()->user()->unreadMessages()->count() }} </span>
                                         @endif
                                     </a>
                                 </li>
