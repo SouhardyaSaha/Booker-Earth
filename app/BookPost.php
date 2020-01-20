@@ -12,7 +12,7 @@ class BookPost extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'title', 'edition', 'author', 
+        'title', 'edition', 'author', 'is_available'
     ];
     
     public function bookPostOwner() {

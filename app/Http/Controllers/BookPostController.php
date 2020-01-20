@@ -138,6 +138,19 @@ class BookPostController extends Controller
         return redirect('book-posts')->with('success','Post Deleted');;
     }
 
+    public function availableBook($id){
+        $bookPost = BookPost::find($id);
+        dd($bookPost);
+        if($bookPost->is_available){
+            $bookPost->is_available = false;
+        }
+        else{
+            $bookPost->is_available = true;
+        }
+
+        return redirect()->back()->with('success','Operation Successful');
+    }
+
     
     public function getMessage($id) {
         $bookPost = BookPost::with('bookPostOwner')->findOrFail($id);

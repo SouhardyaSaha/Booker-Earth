@@ -40,6 +40,7 @@ Route::group(['prefix' => 'book-posts'], function () {
     Route::get('{id}/message', 'BookPostController@getMessage');
     Route::post('{id}/message', 'BookPostController@postMessage');
     Route::get('my-book-posts', 'BookPostController@myBookPosts');
+    Route::get('{id}/toggle/availability', 'BookPostController@availableBook');
     
 });
 Route::resource('book-posts', 'BookPostController');
