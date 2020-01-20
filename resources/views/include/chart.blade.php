@@ -65,6 +65,21 @@
   }
 });
 
+const topFiveUsersWithMostBookPosts = "{{$topFiveUsersWithMostBookPosts}}".replace(/&quot;/g, '"');
+const topFiveData = JSON.parse(topFiveUsersWithMostBookPosts);
+
+let labels = [], data=[];
+data.push(Number.parseInt("{{$totalBookPosts}}"))
+labels.push("You")
+topFiveData.map(item => {
+  labels.push(item.name);
+  data.push(item.total_book_posts);
+});
+
+massPopChart.data.datasets[0].data.push(data);
+console.log(massPopChart.data.datasets[0].data);
+
+
 </script>
 
 @endsection
