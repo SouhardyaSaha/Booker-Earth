@@ -78,6 +78,7 @@ class BookPostController extends Controller
         $bookPost->author = $request->input('author');
         $bookPost->edition = $request->input('edition');
         $bookPost->user_id = auth()->user()->id;
+        auth()->user()->total_book_posts++;
         // $bookPost->image_uri = $fileNameToStore;
         $bookPost->image_uri = 'storage/book_post/images/'.$fileNameToStore;
         $bookPost->save();

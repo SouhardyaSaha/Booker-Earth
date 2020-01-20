@@ -55,7 +55,7 @@ class HomeController extends Controller
 
         // dd($messages);
         $data = [
-
+            'topFiveUsersWithMostBookPosts' => User::orderBy('total_book_posts')->take(5)->get(),
             'totalBookPosts' => auth()->user()->bookPosts()->count(),
             'totalBookRequests' => auth()->user()->bookRequests()->count(),
             'messages' => [
@@ -83,7 +83,7 @@ class HomeController extends Controller
                 break;
         }
 
-        // dd($data);
+        dd($data);
         //dd(Carbon::now()->subMinutes(10)->format('H:i:s Y-m-d'));
         return view('home', $data);
     }
