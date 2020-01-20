@@ -36,7 +36,10 @@
     <script src="{{ asset('js/app.js') }}"></script>
     {{-- select2 script --}}
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 </body>
+@yield('script')
 
 <script type="text/javascript">
 
