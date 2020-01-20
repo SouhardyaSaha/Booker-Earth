@@ -53,7 +53,10 @@
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
-                            Messages <span class="caret"></span>
+                            Messages
+                            @if (auth()->user()->unreadMessages()->count() > 0)
+                             <span class="badge">{{auth()->user()->unreadMessages()->count()}}</span>
+                            @endif
                         </a>
 
                         <ul class="dropdown-menu">
