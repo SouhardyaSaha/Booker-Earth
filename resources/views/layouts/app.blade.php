@@ -41,6 +41,18 @@
 </body>
 @yield('script')
 
+{{-- for Image Uploading --}}
+<script>
+    var uploadField = document.getElementById("image");
+
+    uploadField.onchange = function() {
+        if(this.files[0].size > 1900000){
+        alert("Image Greater than 2 mb!");
+        this.value = "";
+        };
+    };
+</script>
+
 <script type="text/javascript">
 
     $(document).ready(function () {
