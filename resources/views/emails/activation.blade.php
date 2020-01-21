@@ -8,7 +8,7 @@
         <p>Welcome to Booker Earth! An account has been created for in Booker Earth with your email. Please click the link below to verify.</p>
 
         <center>
-            <a href="{{ url('user/activation', $link) }}" class="btn btn-primary">Verify</a>
+            {{ url('user/activation', $link) }}
         </center>
 
         <p>

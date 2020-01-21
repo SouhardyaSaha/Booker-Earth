@@ -44,7 +44,7 @@
 
                         <ul class="dropdown-menu">
                             <li>
-                                <li><a href="{{ url('book-posts/create') }}">Add</a></li>
+                                <li><a href="{{ url('book-posts/create') }}"><i class="fa fa-plus fa-lg" aria-hidden="true">Add</i></a></li>
                                 <li><a href="{{ url('book-posts') }}">List</a></li>
                                 <li><a href="{{ url('book-posts/my-book-posts') }}">My Book Posts</a></li>
                             </li>
@@ -61,15 +61,21 @@
 
                         <ul class="dropdown-menu">
                             <li>
-                                <li><a href="{{ url('messages/send') }}">Send Message</a></li>
-                                <li>
-                                    <a href="{{ url('messages/inbox') }}">Inbox
+                                <li class="hvr-grow">
+                                    <a href="{{ url('messages/send') }}">
+                                        <i class="fa fa-commenting fa-lg" aria-hidden="true"> &nbsp;Message</i>
+                                    </a>
+                                </li>
+                                <li class="hvr-grow">
+                                    <a href="{{ url('messages/inbox') }}">
+                                        <i class="fa fa-inbox fa-lg" aria-hidden="true"> &nbsp; Inbox</i>
+                                        
                                         @if (auth()->user()->unreadMessages()->count() > 0)
                                             <span class="pull-right badge"> {{ auth()->user()->unreadMessages()->count() }} </span>
                                         @endif
                                     </a>
                                 </li>
-                                <li><a href="{{ url('messages/outbox') }}">Outbox</a></li>
+                                <li class="hvr-grow"><a href="{{ url('messages/outbox') }}"><i class="fa fa-archive fa-lg" aria-hidden="true"> &nbsp; Outbox</i></a></li>
                             </li>
                         </ul>
                     </li>
