@@ -26,7 +26,7 @@
                                     <a href="{{ $bookPost->id }}/toggle/availability"  class="btn btn-primary btn-sm">Make Unavailable</a>
                                 
                                 @else
-                                    <a href="{{ $bookPost->id }}/toggle/availability"  class="btn btn-primary btn-sm pull-right">Make Available</a>                                
+                                    <a href="{{ $bookPost->id }}/toggle/availability"  class="btn btn-primary btn-sm">Make Available</a>                                
                                 @endif
                     
                                 <button class="btn btn-danger btn-sm pull-right" data-catid={{$bookPost->id}} data-toggle="modal" data-target="#delete">Delete</button>

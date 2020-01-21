@@ -26,10 +26,10 @@ class BookPostController extends Controller
     {
         $searchInput = Input::get('search');
         if($searchInput != ""){
-            $bookPosts = BookPost::with('bookPostOwner')->where('title' , 'LIKE', '%' . $searchInput . '%')->paginate(env('PAGINATE_PER_PAGE', 16));
+            $bookPosts = BookPost::with('bookPostOwner')->where('title' , 'LIKE', '%' . $searchInput . '%')->whereIsAvailable(true)->paginate(env('PAGINATE_PER_PAGE', 16));
         }
         else{
-            $bookPosts = BookPost::with('bookPostOwner')->latest()->paginate(env('PAGINATE_PER_PAGE', 16));
+            $bookPosts = BookPost::with('bookPostOwner')->whereIsAvailable(true)->latest()->paginate(env('PAGINATE_PER_PAGE', 16));
         }
         
         return view('book-posts.index', compact('bookPosts', 'searchInput'));
@@ -132,7 +132,7 @@ class BookPostController extends Controller
         $bookPost = BookPost::whereId($id)->whereUserId(auth()->user()->id)->whereNull('deleted_at')->first();
 
         if (is_null($bookPost)) {
-            return redirect()->back();
+            return redirect()->back()->with('error','Invalid Operation');
         }
 
         $bookPost->delete();
@@ -180,7 +180,7 @@ class BookPostController extends Controller
 
     public function myBookPosts(Request $request) {
 
-        $bookPosts = BookPost::whereUserId(auth()->user()->id)->withTrashed()->paginate(16);
+        $bookPosts = BookPost::whereUserId(auth()->user()->id)->withTrashed()->latest()->paginate(16);
 
         return view('book-posts.myBookPosts', compact('bookPosts'));
     }
