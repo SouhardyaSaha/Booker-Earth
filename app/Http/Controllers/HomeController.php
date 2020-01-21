@@ -56,7 +56,7 @@ class HomeController extends Controller
         // dd($messages);
         $data = [
             'topFiveUsersWithMostBookPosts' => User::orderBy('total_book_posts','desc')->take(5)->get(),
-            'totalBookPosts' => auth()->user()->total_book_posts,
+            'totalBookPosts' => auth()->user()->bookPosts()->count(),
             'totalBookRequests' => auth()->user()->bookRequests()->count(),
             'messages' => [
                 'totalReceivedMessages' => auth()->user()->receivedMessages()->count(),

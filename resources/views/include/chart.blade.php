@@ -68,8 +68,10 @@
   }
 });
 
-const topFiveUsersWithMostBookPosts = "{{$topFiveUsersWithMostBookPosts}}".replace(/&quot;/g, '"');
-const topFiveData = JSON.parse(topFiveUsersWithMostBookPosts);
+// const topFiveUsersWithMostBookPosts = "{{$topFiveUsersWithMostBookPosts}}".replace(/&quot;/g, '"');
+// const topFiveData = JSON.parse(topFiveUsersWithMostBookPosts);
+const topFiveData = {!! json_encode($topFiveUsersWithMostBookPosts->toArray(), JSON_HEX_TAG) !!};
+
 
 let labels = [], data=[];
 labels.push("You");

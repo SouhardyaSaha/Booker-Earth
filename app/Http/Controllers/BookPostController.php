@@ -82,6 +82,7 @@ class BookPostController extends Controller
         // $bookPost->image_uri = $fileNameToStore;
         $bookPost->image_uri = 'storage/book_post/images/'.$fileNameToStore;
         $bookPost->save();
+        auth()->user()->save();
         return redirect('book-posts')->with('success','Book Post Created');
     }    
 
@@ -140,13 +141,15 @@ class BookPostController extends Controller
 
     public function availableBook($id){
         $bookPost = BookPost::find($id);
-        dd($bookPost);
+        // dd($bookPost);
         if($bookPost->is_available){
             $bookPost->is_available = false;
         }
         else{
             $bookPost->is_available = true;
         }
+
+        $bookPost->save();
 
         return redirect()->back()->with('success','Operation Successful');
     }
