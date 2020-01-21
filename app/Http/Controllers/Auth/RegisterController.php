@@ -90,9 +90,9 @@ class RegisterController extends Controller
                 $message->to($user['email']);
                 $message->subject('Email Verfication Code');
             });
-            return redirect()->to('login')->with('success',"We have sent an activation link. Please check your mail.");
+            return redirect()->to('login')->with('success',"An Activation link has been sent to your email.");
         }
-        return back()->with('errors', $validator->errors());
+        return back()->with('error', $validator->errors());
     }
   
     public function userActivation($token){
@@ -104,9 +104,9 @@ class RegisterController extends Controller
             }
             $user->update(['is_email_verified' => 1]);
             DB::table('users_activation')->where('token',$token)->delete();
-            return redirect()->to('login')->with('success',"user active successfully.");
+            return redirect()->to('login')->with('success',"Email has been verified successfully.");
         }
-        return redirect()->to('login')->with('Warning',"your token is invalid");
+        return redirect()->to('login')->with('error',"your token is invalid");
     }
 
 }
