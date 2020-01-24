@@ -62,10 +62,10 @@ class User extends Authenticatable
 
     // get the users except the signed one for message recipient
     public function scopeRecipients($query, $q, User $except) {
-        return $query->where('id', '!=', $except->id)
-            ->where(function($query) use($q) {
-                $query->where('name', 'LIKE', "%{$q}%");
-            });
+        return $query->where('id', '!=', $except->id)->where('name', 'LIKE', "%{$q}%");
+            // ->where(function($query) use($q) {
+            //     $query->where('name', 'LIKE', "%{$q}%");
+            // });
     }
 
 }
