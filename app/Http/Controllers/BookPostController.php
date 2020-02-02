@@ -25,13 +25,13 @@ class BookPostController extends Controller
     public function index()
     {
         $searchInput = Input::get('search');
-        if($searchInput != ""){
-            $bookPosts = BookPost::with('bookPostOwner')->where('title' , 'LIKE', '%' . $searchInput . '%')->whereIsAvailable(true)->paginate(env('PAGINATE_PER_PAGE', 16));
-        }
+        if ($searchInput != ""){
+            $bookPosts = BookPost::with('bookPostOwner')->where('title', 'LIKE', '%' . $searchInput . '%')->whereIsAvailable(true)->paginate(env('PAGINATE_PER_PAGE', 16));
+        } 
         else{
             $bookPosts = BookPost::with('bookPostOwner')->whereIsAvailable(true)->latest()->paginate(env('PAGINATE_PER_PAGE', 16));
         }
-        
+
         return view('book-posts.index', compact('bookPosts', 'searchInput'));
     }
 
@@ -53,23 +53,25 @@ class BookPostController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $this->validate($request, [
-            'image' => 'image|nullable|max:1999'
+            'title' => 'required',
+            'author' => 'required',
+            'image' => 'image|nullable|max:1999',
         ]);
 
         // auth()->user()->bookPosts()->create($request->all());
-        
+
         // Handle Image Upload
         if ($request->hasFile('image')) {
             $fileNameWithExt = $request->file('image')->getClientOriginalName();
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('image')->getClientOriginalExtension();
 
-            $fileNameToStore = $fileName.'_'.time().'.'.$extension;
+            $fileNameToStore = $fileName . '_' . time() . '.' . $extension;
 
             $path = $request->file('image')->storeAs('public/book_post/images', $fileNameToStore);
-        }else{
+        } else {
             $fileNameToStore = 'noimage.png';
         }
 
@@ -79,12 +81,22 @@ class BookPostController extends Controller
         $bookPost->edition = $request->input('edition');
         $bookPost->user_id = auth()->user()->id;
         auth()->user()->total_book_posts++;
-        // $bookPost->image_uri = $fileNameToStore;
-        $bookPost->image_uri = 'storage/book_post/images/'.$fileNameToStore;
+
+
+        if (!$request->hasFile('image') && $request->input('image_from_api') != '') {
+
+            $bookPost->image_uri = $request->input('image_from_api');
+
+        } else {
+
+            $bookPost->image_uri = 'storage/book_post/images/' . $fileNameToStore;
+        }
+
         $bookPost->save();
         auth()->user()->save();
-        return redirect('book-posts')->with('success','Book Post Created');
-    }    
+
+        return redirect('book-posts')->with('success', 'Book Post Created');
+    }
 
     /**
      * Display the specified resource.
@@ -94,7 +106,7 @@ class BookPostController extends Controller
      */
     public function show(BookPost $bookPost)
     {
-        $comments = Comment::where('bookPost_id','=',$bookPost->id)->latest()->paginate(10);
+        $comments = Comment::where('bookPost_id', '=', $bookPost->id)->latest()->paginate(10);
         return view('book-posts.show', compact('bookPost', 'comments'));
     }
 
@@ -132,41 +144,43 @@ class BookPostController extends Controller
         $bookPost = BookPost::whereId($id)->whereUserId(auth()->user()->id)->whereNull('deleted_at')->first();
 
         if (is_null($bookPost)) {
-            return redirect()->back()->with('error','Invalid Operation');
+            return redirect()->back()->with('error', 'Invalid Operation');
         }
 
         $bookPost->delete();
-        return redirect('book-posts')->with('success','Post Deleted');;
+        return redirect('book-posts')->with('success', 'Post Deleted');;
     }
 
-    public function availableBook($id){
+    public function availableBook($id)
+    {
         $bookPost = BookPost::find($id);
         // dd($bookPost);
-        if($bookPost->is_available){
+        if ($bookPost->is_available) {
             $bookPost->is_available = false;
-        }
-        else{
+        } else {
             $bookPost->is_available = true;
         }
 
         $bookPost->save();
 
-        return redirect()->back()->with('success','Operation Successful');
+        return redirect()->back()->with('success', 'Operation Successful');
     }
 
-    
-    public function getMessage($id) {
+
+    public function getMessage($id)
+    {
         $bookPost = BookPost::with('bookPostOwner')->findOrFail($id);
         return view('book-posts.message', compact('bookPost'));
     }
-    
-    public function postMessage(Request $request){
+
+    public function postMessage(Request $request)
+    {
         $id = $request->get('book_post_id');
         $bookPost = BookPost::with('bookPostOwner')->findOrFail($id);
-        
+
         $rec = $bookPost->bookPostOwner->id;
         $sender = auth()->user()->id;
-        
+
         $message = new Message;
         $message->sender_id = $sender;
         $message->receiver_id = $rec;
@@ -174,11 +188,12 @@ class BookPostController extends Controller
         $message->msg_body = $request->input('msg');
         // dd($message);
         $message->save();
-        return redirect('book-posts')->with('success','Message Send please wait for reply');
+        return redirect('book-posts')->with('success', 'Message Send please wait for reply');
     }
 
 
-    public function myBookPosts(Request $request) {
+    public function myBookPosts(Request $request)
+    {
 
         $bookPosts = BookPost::whereUserId(auth()->user()->id)->withTrashed()->latest()->paginate(16);
 

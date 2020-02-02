@@ -31,19 +31,19 @@ Route::group(['prefix' => 'book-requests'], function () {
     Route::get('create', 'BookRequestsController@create');
     Route::get('{id}/message', 'BookRequestsController@getMessage')->name('bookRequestMessage');
     Route::post('{id}/message', 'BookRequestsController@postMessage')->name('bookRequestMessage.submit');
-    
+
 });
 
 
 // Book Post
 Route::group(['prefix' => 'book-posts'], function () {
-    
+
     Route::get('{id}/delete', 'BookPostController@destroy');
     Route::get('{id}/message', 'BookPostController@getMessage');
     Route::post('{id}/message', 'BookPostController@postMessage');
     Route::get('my-book-posts', 'BookPostController@myBookPosts');
     Route::get('{id}/toggle/availability', 'BookPostController@availableBook');
-    
+
 });
 Route::resource('book-posts', 'BookPostController');
 
@@ -51,7 +51,7 @@ Route::resource('book-posts', 'BookPostController');
 Route::post('comment', 'CommentController@store');
 
 // Messages
-Route::group(['prefix' => 'messages'], function() {
+Route::group(['prefix' => 'messages'], function () {
     Route::get('send', 'MessageController@send');
     Route::get('inbox', 'MessageController@inbox');
     Route::get('outbox', 'MessageController@outbox');
@@ -68,3 +68,6 @@ Route::post('ban/user', 'AdminController@banUser')->name('banUser');
 //Creating User from admin Routes
 Route::get('create/user', 'AdminController@createUser');
 Route::post('create/user', 'AdminController@storeUser')->name('registerUserFromAdmin');
+
+/// Auto Search Route For Books
+Route::get('search-book', 'ApiController@BookSearchByApi');
