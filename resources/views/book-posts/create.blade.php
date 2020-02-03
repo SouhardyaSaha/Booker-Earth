@@ -65,7 +65,7 @@
                                     value="{{ old('image') }}" autofocus>
                                 <img src="" alt="" id="display_image_from_api" style="display: none">
                                 <b id='overwrite_message' style="color: brown; display: none">You can overwrite this image by uploading yours</b>
-                                <input id="image_from_api" type="text" value="" name="image_from_api">
+                                <input id="image_from_api" type="hidden" value="" name="image_from_api">
                                 @if ($errors->has('image'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('image') }}</strong>
