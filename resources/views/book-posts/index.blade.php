@@ -15,7 +15,7 @@
     @if(!$bookPosts->isEmpty())
         @foreach($bookPosts as $bookPost)
             <div class="col-xs-6 col-md-3">
-                <div class="thumbnail hvr-grow-shadow" style="min-height: 450px; margin-bottom: 20px; margin-top: 20px">
+                <div class="thumbnail hvr-grow-shadow" style="min-height: 550px; margin-bottom: 20px; margin-top: 20px">
                     <a href="/book-posts/{{ $bookPost->id }}"><img src = "{{$bookPost->image_uri}}" class="img-thumbnail" style="width:250px;height:300px;"></a>
                     <div class="caption ">
                         <p class="text-center">

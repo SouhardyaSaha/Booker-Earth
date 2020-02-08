@@ -24,7 +24,7 @@ class ApiController extends Controller
     }
 
 
-    function getBooksFromGoodReadsApi($keyValue)
+    private function getBooksFromGoodReadsApi($keyValue)
     {
 
         $key = env('KEY_FOR_GOODREADS_API');
@@ -73,7 +73,7 @@ class ApiController extends Controller
     }
 
     // Route::get('search-book-google', );
-    function getBooksFromGoogleBooksApi($keyValue)
+    private function getBooksFromGoogleBooksApi($keyValue)
     {
 
         if (version_compare(PHP_VERSION, '7.2.0', '>=')) {
