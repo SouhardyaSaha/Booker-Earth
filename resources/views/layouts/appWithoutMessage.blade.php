@@ -13,26 +13,22 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/hover-min.css') }}" rel="stylesheet">
     {{-- Font Awesome Cdm --}}
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
     {{-- Select 2 cdn --}}
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
-
-    {{-- auto-complete plugin css --}}
-    <link href="{{ asset('css/auto-complete.css') }}" rel="stylesheet">
 </head>
 
 <body>
     <div id="app">
         @include('include.navbar')
-
+        
         <div style="height: 80px"></div>
         <div class="container">
-            @include('include.messages')
+            {{-- if a page has its own error/success notify system just block it. --}}
+            {{-- @include('include.messages') --}}
             @yield('content')
         </div>
     </div>
@@ -41,27 +37,7 @@
     <script src="{{ asset('js/app.js') }}"></script>
     {{-- select2 script --}}
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
-
-    {{-- Chart js cdn --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
-
-    {{-- autocomplete plugin --}}
-    <script src=" {{ asset('js/jquery.autocomplete.min.js') }} "></script>
-    
 </body>
-@yield('script')
-
-{{-- Restrict Image Uploading Size --}}
-<script>
-    var uploadField = document.getElementById("image");
-
-    uploadField.onchange = function() {
-        if(this.files[0].size > 1900000){
-            alert("Image Greater than 2 mb!");
-            this.value = "";
-        };
-    };
-</script>
 
 <script type="text/javascript">
 
